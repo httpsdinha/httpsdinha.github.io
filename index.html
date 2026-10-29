@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amanda Gois · Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ee;--surface:#fffdf9;--ink:#1c1a17;--muted:#6d675d;--line:#e6e0d5;
+  --accent:#d9480f;--accent2:#5f3dc4;--accent3:#0b7285;--soft:#fbe9df;--chip:#efeae1;
+  --code:#1f1d1a;--codeink:#efe9dd;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12110f;--surface:#1b1a17;--ink:#f2ede3;--muted:#a39d91;--line:#2c2a25;
+  --accent:#ff8a4c;--accent2:#a78bfa;--accent3:#3bc9db;--soft:#2e1f17;--chip:#25231f;
+  --code:#0c0b0a;--codeink:#e8e2d6;
+}}
+:root[data-theme="dark"]{
+  --bg:#12110f;--surface:#1b1a17;--ink:#f2ede3;--muted:#a39d91;--line:#2c2a25;
+  --accent:#ff8a4c;--accent2:#a78bfa;--accent3:#3bc9db;--soft:#2e1f17;--chip:#25231f;
+  --code:#0c0b0a;--codeink:#e8e2d6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+code,.mono{font-family:"JetBrains Mono",monospace}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px;gap:16px}
+.logo{font-family:Fraunces,serif;font-weight:800;font-size:22px;text-decoration:none;letter-spacing:-.02em}
+.logo span{color:var(--accent)}
+.links{display:flex;gap:20px;font-size:14px;color:var(--muted)}
+.links a{text-decoration:none}.links a:hover{color:var(--accent)}
+#theme{background:var(--surface);border:1px solid var(--line);border-radius:999px;width:36px;height:36px;color:var(--ink);cursor:pointer;font-size:16px}
+
+/* hero */
+.hero{position:relative;padding:96px 0 72px;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;z-index:-1}
+.b1{width:420px;height:420px;background:var(--accent);top:-120px;right:-80px}
+.b2{width:360px;height:360px;background:var(--accent2);bottom:-160px;left:-100px;opacity:.22}
+.hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:48px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:13px;color:var(--muted)}
+.pill i{width:8px;height:8px;border-radius:50%;background:#2f9e44;box-shadow:0 0 0 4px color-mix(in srgb,#2f9e44 25%,transparent)}
+h1{font-family:Fraunces,serif;font-weight:800;font-size:clamp(44px,7.2vw,84px);line-height:.98;letter-spacing:-.035em;margin:22px 0}
+h1 em{font-style:italic;font-weight:400;color:var(--accent)}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:600px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;border:1px solid var(--line);text-decoration:none;font-weight:500;font-size:15px;background:var(--surface);transition:.2s}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:hover{transform:translateY(-2px);border-color:var(--accent)}
+
+.idcard{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 30px 60px -30px rgba(0,0,0,.25);transform:rotate(1.5deg)}
+.avatar{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-family:Fraunces,serif;font-size:30px;font-weight:800;color:#fff}
+.idcard h3{font-family:Fraunces,serif;font-size:22px;margin-top:16px}
+.idcard .role{color:var(--muted);font-size:14px}
+.idrows{margin-top:18px;display:flex;flex-direction:column;gap:10px;font-size:14px}
+.idrows div{display:flex;justify-content:space-between;border-top:1px dashed var(--line);padding-top:10px}
+.idrows span:first-child{color:var(--muted)}
+
+/* marquee */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;padding:16px 0;background:var(--surface)}
+.track{display:flex;gap:44px;white-space:nowrap;animation:roll 40s linear infinite;width:max-content}
+.track span{font-family:Fraunces,serif;font-size:22px;color:var(--muted)}
+.track span b{color:var(--accent);font-weight:400;margin-right:44px}
+@keyframes roll{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.track{animation:none}}
+
+/* sections */
+section{padding:88px 0}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+h2{font-family:Fraunces,serif;font-size:clamp(32px,4.6vw,52px);font-weight:800;letter-spacing:-.025em;line-height:1.05;margin:10px 0 14px}
+.sub{color:var(--muted);max-width:640px;margin-bottom:42px;font-size:17px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px}
+.stat b{display:block;font-family:Fraunces,serif;font-size:44px;line-height:1;letter-spacing:-.03em}
+.stat span{font-size:14px;color:var(--muted)}
+
+/* productivity chart */
+.prod{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px;margin-top:14px}
+.prod-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:22px}
+.prod h3{font-family:Fraunces,serif;font-size:24px}
+.prod p{color:var(--muted);font-size:15px;max-width:620px}
+.legend{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px;white-space:nowrap}
+.legend i{width:10px;height:10px;border-radius:3px;background:var(--accent)}
+.chart{display:flex;align-items:flex-end;gap:8px;height:230px}
+.col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px}
+.col .v{font:500 12px "JetBrains Mono",monospace;color:var(--muted)}
+.col .bk{width:100%;max-width:52px;border-radius:7px 7px 2px 2px;background:color-mix(in srgb,var(--accent) 35%,var(--chip));transition:height .9s cubic-bezier(.2,.8,.2,1)}
+.col.ai .bk{background:var(--accent)}
+.col .m{font:11px "JetBrains Mono",monospace;color:var(--muted)}
+/* case studies */
+.result{display:flex;flex-wrap:wrap;gap:8px 18px;padding:12px 0;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line)}
+.result div b{display:block;font-family:Fraunces,serif;font-size:24px;line-height:1.1;color:var(--accent)}
+.result div span{font-size:12px;color:var(--muted)}
+.p .lbl{font:600 11px "JetBrains Mono",monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--ink);margin-bottom:-6px}
+
+/* companies */
+.companies{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.co{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}
+.co::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--c,var(--accent))}
+.co .mark{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-weight:700;font-family:Fraunces,serif;font-size:20px;color:#fff;background:var(--c,var(--accent))}
+.co h3{font-family:Fraunces,serif;font-size:22px}
+.co .meta{font-size:13px;color:var(--muted)}
+.co ul{list-style:none;font-size:14px;color:var(--muted);display:flex;flex-direction:column;gap:5px}
+.co li::before{content:"· ";color:var(--c,var(--accent));font-weight:700}
+.co .now{position:absolute;top:18px;right:18px;font-size:11px;background:var(--soft);color:var(--accent);padding:3px 9px;border-radius:999px;font-weight:600}
+
+/* projects */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.filters button{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:7px 15px;font:500 14px Inter,sans-serif;cursor:pointer}
+.filters button.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.projects{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;align-items:stretch;grid-auto-flow:row dense}
+.p{grid-column:span 2;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:10px;transition:.25s}
+.p.big{grid-column:span 3}
+.p:hover{border-color:var(--accent);transform:translateY(-3px)}
+.p.hide{display:none}
+.p .top{display:flex;justify-content:space-between;align-items:center;font-size:12px}
+.p .cat{font-family:"JetBrains Mono",monospace;color:var(--accent);text-transform:uppercase;letter-spacing:.06em}
+.lock{color:var(--muted);font-size:12px}
+.p h3{font-family:Fraunces,serif;font-size:23px;line-height:1.15}
+.p p{color:var(--muted);font-size:15px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--chip);border-radius:7px;padding:3px 9px;font-size:12px;font-family:"JetBrains Mono",monospace;color:var(--muted)}
+.p .foot{margin-top:auto;padding-top:12px;display:flex;flex-direction:column;gap:12px}
+.p .go{font-size:14px;font-weight:600;color:var(--accent);text-decoration:none}
+.p .go:hover{text-decoration:underline}
+
+/* examples */
+.examples{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
+.ex .stage{padding:24px;background:linear-gradient(160deg,var(--soft),transparent 70%);border-bottom:1px solid var(--line);min-height:250px;display:flex;flex-direction:column;justify-content:center}
+.ex .txt{padding:22px 24px}
+.ex h3{font-family:Fraunces,serif;font-size:21px;margin-bottom:6px}
+.ex p{color:var(--muted);font-size:15px}
+.chat{display:flex;flex-direction:column;gap:10px;font-size:14px}
+.msg{max-width:82%;padding:10px 14px;border-radius:16px;line-height:1.45}
+.msg.u{align-self:flex-end;background:#d3f9d8;color:#1b4332;border-bottom-right-radius:4px}
+.msg.a{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px}
+.msg small{display:block;font-size:11px;opacity:.6;margin-top:4px}
+pre{background:var(--code);color:var(--codeink);border-radius:14px;padding:18px;font:13px/1.6 "JetBrains Mono",monospace;overflow-x:auto}
+pre .k{color:#ff8a4c}pre .s{color:#8ce99a}pre .c{color:#868e96}pre .f{color:#a5d8ff}
+.bars{display:flex;align-items:flex-end;gap:8px;height:150px;padding-top:10px}
+.bars div{flex:1;background:var(--accent3);border-radius:6px 6px 2px 2px;opacity:.85;position:relative}
+.bars div.hi{background:var(--accent);opacity:1}
+.bars-l{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px;font-family:"JetBrains Mono",monospace}
+.kpi{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.kpi b{font-family:Fraunces,serif;font-size:36px}
+.kpi span{font-size:13px;color:#2f9e44;font-weight:600}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px}
+.flow .n{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-weight:500}
+.flow .n.g{border-color:var(--accent);color:var(--accent)}
+.flow .ar{color:var(--muted)}
+
+/* mcps + skills */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:28px}
+.panel h3{font-family:Fraunces,serif;font-size:26px;margin-bottom:4px}
+.panel>p{color:var(--muted);font-size:15px;margin-bottom:18px}
+.item{display:grid;grid-template-columns:38px 1fr;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.item .ic{width:38px;height:38px;border-radius:10px;background:var(--chip);display:grid;place-items:center;font-size:18px}
+.item b{font-size:15px}
+.item p{font-size:14px;color:var(--muted)}
+.item code{font-size:12px;color:var(--accent)}
+
+/* stack */
+.stack{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.st{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.st h4{font-family:"JetBrains Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent2);margin-bottom:14px;font-weight:500}
+.bar{margin-bottom:10px;font-size:14px}
+.bar .t{display:flex;justify-content:space-between}
+.bar .t span{color:var(--muted);font-size:12px}
+.bar .tr{height:6px;background:var(--chip);border-radius:6px;margin-top:4px;overflow:hidden}
+.bar .tr i{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:6px}
+
+/* timeline edu */
+.edu{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.edu .st b{font-family:Fraunces,serif;font-size:20px;display:block;margin:4px 0}
+.edu .st p{font-size:14px;color:var(--muted)}
+
+footer{padding:96px 0 48px;text-align:center;position:relative;overflow:hidden}
+footer h2{font-size:clamp(40px,7vw,80px)}
+footer .cta{justify-content:center}
+footer .small{color:var(--muted);font-size:13px;margin-top:56px}
+
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .hero-grid,.duo,.examples{grid-template-columns:1fr}
+  .idcard{transform:none}
+  .companies,.stack,.edu{grid-template-columns:1fr 1fr}
+  .projects{grid-template-columns:1fr 1fr}.p,.p.big{grid-column:span 1}
+  .links{display:none}
+}
+@media (max-width:600px){
+  .stats,.companies,.stack,.edu,.projects{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr 1fr}
+  .hero{padding:56px 0 48px}
+  section{padding:64px 0}
+}
+.outcomes{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.oc{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px;position:relative;overflow:hidden}
+.oc .big{font-family:Fraunces,serif;font-weight:800;font-size:56px;line-height:1;letter-spacing:-.03em;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:12px}
+.oc h3{font-family:Fraunces,serif;font-size:22px;margin-bottom:6px}
+.oc p{color:var(--muted);font-size:15px}
+@media (max-width:700px){.outcomes{grid-template-columns:1fr}}
+.carousel{margin-bottom:44px}
+.car-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.car-head h3{font-family:Fraunces,serif;font-size:26px}
+.car-head small{font:500 13px "JetBrains Mono",monospace;color:var(--muted);margin-left:6px;vertical-align:middle}
+.arrows{display:flex;gap:8px}
+.arrows button{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--ink);font-size:18px;cursor:pointer;transition:.2s}
+.arrows button:hover{border-color:var(--accent);color:var(--accent)}
+.arrows button:disabled{opacity:.35;cursor:default}
+.track-c{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 32px)/3);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:4px 2px 18px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.track-c>.p{scroll-snap-align:start;padding:0;overflow:hidden;grid-column:auto}
+.track-c::-webkit-scrollbar{height:6px}.track-c::-webkit-scrollbar-track{background:transparent}.track-c::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
+.track-c>.p>*:not(.media){margin-left:22px;margin-right:22px}
+.track-c>.p>.top{margin-top:4px}
+.track-c>.p>.foot{margin-bottom:22px}
+.media{display:block;height:130px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.media.img img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s}
+.media.img:hover img{transform:scale(1.04)}
+.media .cap{position:absolute;left:10px;bottom:10px;right:10px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(6px);font-size:12px;padding:5px 10px;border-radius:8px}
+.media.cover{display:grid;place-items:center;font-size:44px}
+.media.cover span{filter:drop-shadow(0 8px 16px rgba(0,0,0,.18))}
+.c-work{background:radial-gradient(circle at 25% 20%,color-mix(in srgb,var(--accent) 45%,transparent),transparent 60%),radial-gradient(circle at 80% 90%,color-mix(in srgb,var(--accent2) 40%,transparent),transparent 55%),var(--soft)}
+.c-univ{background:radial-gradient(circle at 25% 20%,color-mix(in srgb,var(--accent2) 45%,transparent),transparent 60%),radial-gradient(circle at 80% 90%,color-mix(in srgb,var(--accent3) 40%,transparent),transparent 55%),var(--chip)}
+.c-pessoal{background:radial-gradient(circle at 25% 20%,color-mix(in srgb,var(--accent3) 45%,transparent),transparent 60%),radial-gradient(circle at 80% 90%,color-mix(in srgb,var(--accent) 30%,transparent),transparent 55%),var(--chip)}
+@media (max-width:900px){.track-c{grid-auto-columns:calc((100% - 16px)/2)}}
+@media (max-width:600px){.track-c{grid-auto-columns:86%}}
+.track-c{align-items:stretch}
+.track-c>.p{gap:8px}
+.track-c>.p p{font-size:14px}
+.track-c>.p:not(.open) p:not(.sum),.track-c>.p:not(.open) .lbl,.track-c>.p:not(.open) .flow,.track-c>.p:not(.open) .result{display:none}
+.track-c>.p:not(.open) p.sum{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.track-c>.p h3{font-size:21px}
+.track-c>.p .more{background:none;border:0;color:var(--accent);font:600 13px Inter,sans-serif;cursor:pointer;text-align:left;padding:0;align-self:flex-start}
+.track-c>.p .flow{gap:6px;font-size:12px}.track-c>.p .flow .n{padding:5px 9px}
+/* i18n */
+html[data-lang="pt"] .en,html[data-lang="en"] .pt{display:none!important}
+html:not([data-lang]) .en{display:none!important}
+.navr{display:flex;gap:10px;align-items:center}
+.lang{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px}
+.lang button{border:0;background:none;color:var(--muted);font:600 13px Inter,sans-serif;padding:6px 12px;border-radius:999px;cursor:pointer}
+.lang button.on{background:var(--ink);color:var(--bg)}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="logo" href="#">amanda<span>.</span>gois</a>
+  <div class="links">
+    <a href="#projetos"><span class="pt">Projetos</span><span class="en">Projects</span></a>
+    <a href="#trajetoria"><span class="pt">Experiência</span><span class="en">Experience</span></a>
+    <a href="#mcps"><span class="pt">Ferramentas</span><span class="en">Tooling</span></a>
+    <a href="#stack">Stack</a>
+    <a href="#contato"><span class="pt">Contato</span><span class="en">Contact</span></a>
+  </div>
+  <div class="navr">
+    <div class="lang" role="group" aria-label="Idioma / Language">
+      <button data-l="pt">PT</button><button data-l="en">EN</button>
+    </div>
+    <button id="theme" aria-label="Tema / Theme">◐</button>
+  </div>
+</div></nav>
+
+<header class="hero">
+  <div class="blob b1"></div><div class="blob b2"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><i></i><span class="pt">Engenheira de Software · aberta a oportunidades</span><span class="en">Software Engineer · open to opportunities</span></span>
+      <h1 class="pt">Engenheira de Software. <em>Full stack e LLMs</em> em produção.</h1>
+      <h1 class="en">Software Engineer. <em>Full stack and LLMs</em> in production.</h1>
+      <p class="lead pt">Projeto, construo e opero sistemas de ponta a ponta: APIs, arquiteturas serverless orientadas a eventos, interfaces web e aplicações com LLM. Trabalho com testes automatizados, CI/CD e observabilidade, e meço o resultado do que entrego em produção.</p>
+      <p class="lead en">I design, build and run systems end to end: APIs, event-driven serverless architectures, web front ends and LLM-powered applications. I work with automated testing, CI/CD and observability, and I measure the production impact of what I ship.</p>
+      <div class="cta">
+        <a class="btn primary" href="#projetos"><span class="pt">Ver projetos →</span><span class="en">See projects →</span></a>
+        <a class="btn" href="https://github.com/httpsdinha" target="_blank">GitHub ↗</a>
+        <a class="btn" href="https://www.linkedin.com/in/amandagois/" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+    <div class="idcard">
+      <div class="avatar">AG</div>
+      <h3>Amanda Gois</h3>
+      <div class="role"><span class="pt">Engenheira de Software · Brasil</span><span class="en">Software Engineer · Brazil</span></div>
+      <div class="idrows">
+        <div><span class="pt">Atual</span><span class="en">Current</span><span class="pt">Software Engineer · Seazone</span><span class="en">Software Engineer · Seazone</span></div>
+        <div><span>Core</span><span>Python · TypeScript · AWS</span></div>
+        <div><span class="pt">Foco</span><span class="en">Focus</span><span>Full stack · LLM</span></div>
+        <div><span class="pt">Formação</span><span class="en">Education</span><span class="pt">B.Sc. Eng. de Software · UFMS</span><span class="en">B.Sc. Software Eng. · UFMS</span></div>
+        <div><span class="pt">Idiomas</span><span class="en">Languages</span><span class="pt">Português · Inglês</span><span class="en">Portuguese · English</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee"><div class="track">
+  <span><b>✦</b>Python</span><span><b>✦</b>TypeScript</span><span><b>✦</b>AWS Lambda</span><span><b>✦</b>FastAPI</span><span><b>✦</b>React</span><span><b>✦</b>PostgreSQL</span><span><b>✦</b>Kubernetes</span><span><b>✦</b>CI/CD</span><span><b>✦</b>LLM · RAG</span><span><b>✦</b>Playwright</span>
+  <span><b>✦</b>Python</span><span><b>✦</b>TypeScript</span><span><b>✦</b>AWS Lambda</span><span><b>✦</b>FastAPI</span><span><b>✦</b>React</span><span><b>✦</b>PostgreSQL</span><span><b>✦</b>Kubernetes</span><span><b>✦</b>CI/CD</span><span><b>✦</b>LLM · RAG</span><span><b>✦</b>Playwright</span>
+</div></div>
+
+<section id="projetos"><div class="wrap">
+  <div class="eyebrow"><span class="pt">01 · Projetos</span><span class="en">01 · Projects</span></div>
+  <h2 class="pt">Projetos selecionados</h2><h2 class="en">Selected projects</h2>
+  <p class="sub pt">Projetos profissionais são privados, então descrevo arquitetura e resultado sem expor dados. Projetos com link têm repositório público.</p>
+  <p class="sub en">Professional projects are private, so I describe architecture and outcomes without exposing data. Linked projects have public repositories.</p>
+  <div class="carousel" data-c="work">
+    <div class="car-head"><h3><span class="pt">Profissional</span><span class="en">Professional</span> <small>6</small></h3>
+      <div class="arrows"><button class="prev" aria-label="anterior">←</button><button class="next" aria-label="próximo">→</button></div></div>
+    <div class="track-c">
+    <article class="p" data-c="work">
+      <div class="media cover c-work"><span>💬</span></div>
+      <div class="top"><span class="cat">LLM · WhatsApp · Meta API</span><span class="lock">🔒 <span class="pt">privado</span><span class="en">private</span></span></div>
+      <h3 class="pt">Assistente de LLM para atendimento no WhatsApp</h3><h3 class="en">LLM-powered WhatsApp support assistant</h3>
+      <div class="lbl pt">Desafio</div><div class="lbl en">Challenge</div>
+      <p class="pt">Atender clientes no WhatsApp com um assistente de LLM capaz de resolver dúvidas reais com segurança, escalando para humano só quando necessário.</p>
+      <p class="en">Serve customers on WhatsApp with an LLM assistant that resolves real requests safely, escalating to humans only when needed.</p>
+      <div class="lbl pt">Engenharia</div><div class="lbl en">Engineering</div>
+      <p class="pt">Integração com a WhatsApp Business Platform (Meta Cloud API): webhooks, templates e janela de 24h. Arquitetura serverless orientada a eventos, tool calling sobre dados transacionais, guardrails determinísticos contra alucinação, pipeline de RAG e eval harness (golden set) a cada mudança de prompt ou código.</p>
+      <p class="en">Integration with the WhatsApp Business Platform (Meta Cloud API): webhooks, message templates and the 24h window. Event-driven serverless architecture, tool calling over transactional data, deterministic anti-hallucination guardrails, a RAG pipeline and an eval harness (golden set) on every prompt or code change.</p>
+      <div class="lbl pt">Meu papel</div><div class="lbl en">My role</div>
+      <div class="flow"><span class="n pt">Arquitetura</span><span class="n en">Architecture</span><span class="ar">→</span><span class="n pt">Implementação</span><span class="n en">Implementation</span><span class="ar">→</span><span class="n pt">Shadow mode</span><span class="n en">Shadow mode</span><span class="ar">→</span><span class="n g pt">Go-live</span><span class="n g en">Go-live</span><span class="ar">→</span><span class="n pt">Sustentação</span><span class="n en">Operations</span></div>
+      <div class="foot"><div class="chips"><span class="chip">Python</span><span class="chip">AWS Lambda</span><span class="chip">SQS</span><span class="chip">Meta Cloud API</span><span class="chip">LLM</span><span class="chip">RAG</span><span class="chip">PostgreSQL</span></div></div>
+    </article>
+    <article class="p" data-c="work">
+      <div class="media cover c-work"><span>🗂️</span></div>
+      <div class="top"><span class="cat">Full stack · Realtime</span><span class="lock">🔒 <span class="pt">privado</span><span class="en">private</span></span></div>
+      <h3 class="pt">CRM omnichannel de atendimento</h3><h3 class="en">Omnichannel support CRM</h3>
+      <div class="lbl pt">Desafio</div><div class="lbl en">Challenge</div>
+      <p class="pt">CRM integrado ao WhatsApp onde humanos e IA compartilham as mesmas conversas, com filas, transferências e SLAs que não podiam se perder.</p>
+      <p class="en">WhatsApp-integrated CRM where humans and AI share the same conversations, with queues, handoffs and SLAs that could not be dropped.</p>
+      <div class="lbl pt">Engenharia</div><div class="lbl en">Engineering</div>
+      <p class="pt">Roteamento de filas e handoff entre atendentes, reconciliação de pesquisas de satisfação, jobs agendados para retomar tickets expirados, campanhas transacionais via templates da Meta e streaming em tempo real com backpressure.</p>
+      <p class="en">Queue routing and agent handoff, satisfaction-survey reconciliation, scheduled jobs to resume expired tickets, transactional campaigns via Meta message templates and real-time streaming with backpressure.</p>
+      <div class="lbl pt">Meu papel</div><div class="lbl en">My role</div>
+      <div class="flow"><span class="n pt">Arquitetura</span><span class="n en">Architecture</span><span class="ar">→</span><span class="n pt">Implementação</span><span class="n en">Implementation</span><span class="ar">→</span><span class="n pt">Shadow mode</span><span class="n en">Shadow mode</span><span class="ar">→</span><span class="n g pt">Go-live</span><span class="n g en">Go-live</span><span class="ar">→</span><span class="n pt">Sustentação</span><span class="n en">Operations</span></div>
+      <div class="foot"><div class="chips"><span class="chip">FastAPI</span><span class="chip">React</span><span class="chip">TypeScript</span><span class="chip">PostgreSQL</span><span class="chip">WebSocket</span></div></div>
+    </article>
+    <article class="p" data-c="work">
+      <div class="media cover c-work"><span>🚀</span></div>
+      <div class="top"><span class="cat">DevEx · Agents</span><span class="lock">🔒</span></div>
+      <h3>Bugs Lightyear</h3>
+      <p class="pt">Autopilot de agentes que atende a fila de suporte de bugs: recebe o chamado, investiga a causa raiz, gera plano, implementa, testa e valida em staging, com approval gate humano antes do merge. Roda em Kubernetes com deploy GitOps.</p>
+      <p class="en">Agent autopilot that handles the bug support queue: takes the ticket, investigates the root cause, drafts a plan, implements, tests and validates on staging, with a human approval gate before merge. Runs on Kubernetes with GitOps deploys.</p>
+      <div class="result"><div><b>ticket → PR</b><span class="pt">do suporte ao fix validado</span><span class="en">from support ticket to validated fix</span></div></div>
+      <div class="foot"><div class="chips"><span class="chip">Python</span><span class="chip">Kubernetes</span><span class="chip">GitOps</span></div></div>
+    </article>
+    <article class="p" data-c="work">
+      <div class="media cover c-work"><span>🔍</span></div>
+      <div class="top"><span class="cat">Polícia Federal · Automação</span><span class="lock">🔒</span></div>
+      <h3 class="pt">Automação de fluxos periciais</h3><h3 class="en">Forensic workflow automation</h3>
+      <p class="pt">Ferramentas em Python e Java para automatizar etapas repetitivas da perícia e processar grandes volumes de dados, além da manutenção de scripts e sistemas legados usados pelos peritos.</p>
+      <p class="en">Python and Java tools automating repetitive forensic steps and processing large data volumes, plus maintenance of legacy scripts and systems used by forensic experts.</p>
+      <div class="foot"><div class="chips"><span class="chip">Python</span><span class="chip">Java</span><span class="chip">scripting</span><span class="chip">Linux</span></div></div>
+    </article>
+    <article class="p" data-c="work">
+      <div class="media cover c-work"><span>📊</span></div>
+      <div class="top"><span class="cat">Data · Analytics</span><span class="lock">🔒</span></div>
+      <h3 class="pt">Pipeline diário de KPIs</h3><h3 class="en">Daily KPI pipeline</h3>
+      <p class="pt">Job agendado que calcula métricas de atendimento direto do data lake (SQL), com degradação graciosa por métrica, e publica em Slack e dashboard com funil, série temporal e Pareto.</p>
+      <p class="en">Scheduled job computing support metrics straight from the data lake (SQL), with per-metric graceful degradation, publishing to Slack and a dashboard with funnel, time series and Pareto.</p>
+      <div class="result"><div><b>0 h</b><span class="pt">de cálculo manual</span><span class="en">of manual reporting</span></div></div>
+      <div class="foot"><div class="chips"><span class="chip">SQL</span><span class="chip">Python</span><span class="chip">Athena</span></div></div>
+    </article>
+    <article class="p" data-c="work">
+      <div class="media cover c-work"><span>🔌</span></div>
+      <div class="top"><span class="cat">MCP · Integration</span><span class="lock">🔒</span></div>
+      <h3 class="pt">Servidor MCP + BFF</h3><h3 class="en">MCP server + BFF</h3>
+      <p class="pt">Backend for Frontend serverless que expõe dados de clientes a agentes via Model Context Protocol, com acesso read-only e endpoint de chat.</p>
+      <p class="en">Serverless Backend-for-Frontend exposing customer data to agents via the Model Context Protocol, read-only by design, plus a chat endpoint.</p>
+      <div class="foot"><div class="chips"><span class="chip">TypeScript</span><span class="chip">Bun</span><span class="chip">MCP</span></div></div>
+    </article>
+    </div>
+  </div>
+  <div class="carousel" data-c="univ">
+    <div class="car-head"><h3><span class="pt">Acadêmico, pesquisa & pessoais</span><span class="en">Academic, research & personal</span> <small>9</small></h3>
+      <div class="arrows"><button class="prev" aria-label="anterior">←</button><button class="next" aria-label="próximo">→</button></div></div>
+    <div class="track-c">
+    <article class="p" data-c="univ">
+      <a class="media img" href="portfolio-assets/coins-qualidade.png" target="_blank"><img src="portfolio-assets/coins-qualidade.png" alt="Qualidade no COIN'S: suíte 2,5× maior e 98% de cobertura" loading="lazy"><span class="cap"><span class="pt">Qualidade no COIN'S: suíte 2,5× maior e 98% de cobertura</span><span class="en">COIN'S quality: 2.5× test suite, 98% coverage</span></span></a>
+      <div class="top"><span class="cat">Desktop · UFMS</span><span class="lock">NES · UFMS</span></div>
+      <h3 class="pt">COIN'S · sistema contábil desktop</h3><h3 class="en">COIN'S · desktop accounting system</h3>
+      <p class="pt">Aplicação desktop offline para ensino de contabilidade, evoluída por equipes diferentes a cada semestre.</p>
+      <p class="en">Offline desktop app for accounting education, evolved by a different team every semester.</p>
+      <div class="lbl pt">QA & Desenvolvimento</div><div class="lbl en">QA & Development</div>
+      <p class="pt">Testes eram o maior gap do projeto. Estruturei a estratégia de qualidade com testes manuais e automatizados (unitários e E2E com Playwright) e implementei os módulos de DRE, Balanço Patrimonial e apuração de resultado com exportação em PDF.</p>
+      <p class="en">Testing was the project's biggest gap. I set up the quality strategy with manual and automated tests (unit and E2E with Playwright) and built the income statement, balance sheet and closing modules with PDF export.</p>
+      <div class="lbl pt">Gestão de Projeto & DevOps</div><div class="lbl en">Project Management & DevOps</div>
+      <p class="pt">Depois assumi a gestão do projeto (escopo, requisitos, estimativas, sprints e entrega à banca) e a frente de DevOps: pipeline de CI, build e deploy de produção.</p>
+      <p class="en">I then took over project management (scope, requirements, estimates, sprints and final delivery) and DevOps: CI pipeline, builds and production deploys.</p>
+      <div class="lbl pt">Meu papel</div><div class="lbl en">My role</div>
+      <div class="flow"><span class="n">QA</span><span class="ar">→</span><span class="n">Dev</span><span class="ar">→</span><span class="n">DevOps</span><span class="ar">→</span><span class="n g pt">Gerente de Projeto</span><span class="n g en">Project Manager</span></div>
+      <div class="foot"><div class="chips"><span class="chip">Electron</span><span class="chip">TypeScript</span><span class="chip">Playwright</span><span class="chip">Jest</span><span class="chip">CI/CD</span><span class="chip">MkDocs</span></div>
+      <a class="go" href="https://nes.facom.ufms.br/aluno/amanda-caroline-de-gois-balcacar" target="_blank"><span class="pt">Meu perfil no NES ↗</span><span class="en">My NES profile ↗</span></a></div>
+    </article>
+    <article class="p" data-c="univ">
+      <a class="media img" href="portfolio-assets/checklist-fases.jpeg" target="_blank"><img src="portfolio-assets/checklist-fases.jpeg" alt="Processo da pesquisa em BPMN" loading="lazy"><span class="cap"><span class="pt">Processo da pesquisa em BPMN</span><span class="en">Research process in BPMN</span></span></a>
+      <div class="top"><span class="cat">Pesquisa · Segurança</span><span class="lock">UFMS</span></div>
+      <h3 class="pt">Checklist de segurança em arquitetura de microsserviços</h3><h3 class="en">Security checklist for microservices architecture</h3>
+      <div class="lbl pt">Problema</div><div class="lbl en">Problem</div>
+      <p class="pt">Times que adotam microsserviços não têm um instrumento prático para inspecionar a segurança da arquitetura.</p>
+      <p class="en">Teams adopting microservices lack a practical instrument to inspect their architecture's security.</p>
+      <div class="lbl pt">Método</div><div class="lbl en">Method</div>
+      <p class="pt">Revisão da literatura (Google Scholar e Scopus) em três filtros, análise estática e manual de repositórios open source de microsserviços, e mapeamento de atributos de segurança da ISO/IEC 25010 e 27000 (confidencialidade, integridade, autenticidade, não repúdio, resiliência, rastreabilidade). O checklist é avaliado com TAM (facilidade de uso e utilidade percebidas) e ISO/IEC 27001/27002 (completude e corretude dos controles).</p>
+      <p class="en">Three-stage literature review (Google Scholar and Scopus), static and manual analysis of open source microservices repositories, and mapping of ISO/IEC 25010 and 27000 security attributes (confidentiality, integrity, authenticity, non-repudiation, resilience, traceability). The checklist is evaluated with TAM (perceived ease of use and usefulness) and ISO/IEC 27001/27002 (control coverage and correctness).</p>
+      <div class="lbl pt">Meu papel</div><div class="lbl en">My role</div>
+      <div class="flow"><span class="n pt">Revisão da literatura</span><span class="n en">Literature review</span><span class="ar">→</span><span class="n pt">Análise de repositórios</span><span class="n en">Repository analysis</span><span class="ar">→</span><span class="n pt">Checklist</span><span class="n en">Checklist</span><span class="ar">→</span><span class="n g pt">Avaliação TAM + ISO</span><span class="n g en">TAM + ISO evaluation</span></div>
+      <div class="foot"><div class="chips"><span class="chip">microservices</span><span class="chip">security</span><span class="chip">ISO/IEC 25010</span><span class="chip">ISO/IEC 27001</span><span class="chip">TAM</span><span class="chip">BPMN</span></div></div>
+    </article>
+    <article class="p" data-c="univ">
+      <div class="media cover c-univ"><span>🌐</span></div>
+      <div class="top"><span class="cat">Voluntariado · Web</span><span class="lock"><span class="pt">público</span><span class="en">public</span></span></div>
+      <h3 class="pt">Site do EduComp Brasil 2026</h3><h3 class="en">EduComp Brasil 2026 website</h3>
+      <p class="pt">Trabalho voluntário para o Simpósio Brasileiro de Educação em Computação: atualização e manutenção do site oficial do evento (páginas, conteúdo e layout).</p>
+      <p class="en">Volunteer work for the Brazilian Symposium on Computing Education: updating and maintaining the event's official website (pages, content and layout).</p>
+      <div class="foot"><div class="chips"><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">Handlebars</span></div></div>
+    </article>
+    <article class="p" data-c="univ">
+      <div class="media cover c-univ"><span>📁</span></div>
+      <div class="top"><span class="cat">Next.js</span><span class="lock">🔒</span></div>
+      <h3>PET Manager</h3>
+      <p class="pt">Sistema de gestão de documentos e relatórios do PET Sistemas (UFMS).</p><p class="en">Document and report management system for PET Sistemas (UFMS).</p>
+      <div class="foot"><div class="chips"><span class="chip">Next.js 15</span><span class="chip">TypeScript</span><span class="chip">Tailwind</span></div></div>
+    </article>
+    <article class="p" data-c="univ">
+      <div class="media cover c-univ"><span>📚</span></div>
+      <div class="top"><span class="cat">Microservices</span><span class="lock"><span class="pt">público</span><span class="en">public</span></span></div>
+      <h3>Micro Livraria</h3>
+      <p class="pt">Loja virtual em microsserviços com comunicação via gRPC.</p><p class="en">Online bookstore built as microservices communicating over gRPC.</p>
+      <div class="foot"><div class="chips"><span class="chip">Node.js</span><span class="chip">gRPC</span><span class="chip">Docker</span></div>
+      <a class="go" href="https://github.com/httpsdinha/micro-livraria" target="_blank">GitHub ↗</a></div>
+    </article>
+    <article class="p" data-c="univ">
+      <div class="media cover c-univ"><span>🍳</span></div>
+      <div class="top"><span class="cat">Full stack</span><span class="lock"><span class="pt">público</span><span class="en">public</span></span></div>
+      <h3>Cookbook</h3>
+      <p class="pt">SPA em Vue com API REST em Java.</p><p class="en">Vue SPA backed by a Java REST API.</p>
+      <div class="foot"><div class="chips"><span class="chip">Vue</span><span class="chip">Java</span></div>
+      <a class="go" href="https://github.com/httpsdinha/front-cookbook" target="_blank">Front ↗</a> <a class="go" href="https://github.com/httpsdinha/cookbookApp" target="_blank">Back ↗</a></div>
+    </article>
+
+    <article class="p" data-c="pessoal">
+      <div class="media cover c-pessoal"><span>🍽️</span></div>
+      <div class="top"><span class="cat">Desktop</span><span class="lock"><span class="pt">público</span><span class="en">public</span></span></div>
+      <h3>Virtual Management</h3>
+      <p class="pt">App desktop de gestão operacional para restaurantes.</p><p class="en">Desktop app for restaurant operations management.</p>
+      <div class="foot"><div class="chips"><span class="chip">Electron</span><span class="chip">Vue</span></div>
+      <a class="go" href="https://github.com/httpsdinha/virtual-management" target="_blank">GitHub ↗</a></div>
+    </article>
+    <article class="p" data-c="pessoal">
+      <div class="media cover c-pessoal"><span>🗓️</span></div>
+      <div class="top"><span class="cat">Desktop</span><span class="lock">🔒</span></div>
+      <h3>Manager Me</h3>
+      <p class="pt">Planner multiprojeto com persistência local.</p><p class="en">Multi-project planner with local persistence.</p>
+      <div class="foot"><div class="chips"><span class="chip">Electron</span><span class="chip">React</span><span class="chip">SQLite</span></div></div>
+    </article>
+    <article class="p" data-c="pessoal">
+      <div class="media cover c-pessoal"><span>🕸️</span></div>
+      <div class="top"><span class="cat">Data</span><span class="lock"><span class="pt">público</span><span class="en">public</span></span></div>
+      <h3>Web Scraping</h3>
+      <p class="pt">Coleta e tratamento de dados web em Python.</p><p class="en">Web data collection and cleaning in Python.</p>
+      <div class="foot"><div class="chips"><span class="chip">Python</span></div>
+      <a class="go" href="https://github.com/httpsdinha/web-scraping-dados" target="_blank">GitHub ↗</a></div>
+    </article>
+    </div>
+  </div>
+</div></section>
+
+<section id="trajetoria"><div class="wrap">
+  <div class="eyebrow"><span class="pt">02 · Experiência</span><span class="en">02 · Experience</span></div>
+  <h2 class="pt">Experiência profissional</h2><h2 class="en">Professional experience</h2>
+  <p class="sub pt">Indústria, setor público e pesquisa: do requisito ao deploy, passando por qualidade e segurança.</p>
+  <p class="sub en">Industry, public sector and research: from requirements to deploy, through quality and security.</p>
+  <div class="companies">
+    <div class="co reveal" style="--c:#d9480f">
+      <div class="mark">S</div>
+      <h3>Seazone</h3>
+      <div class="meta"><span class="pt">Engenheira de Software · out 2025 — hoje</span><span class="en">Software Engineer · Oct 2025 — present</span></div>
+      <ul class="pt">
+        <li>Backend serverless orientado a eventos (AWS Lambda, SQS)</li>
+        <li>Full stack: APIs REST (FastAPI) e interfaces React</li>
+        <li>Aplicações com LLM: tool calling, RAG, guardrails e evals</li>
+        <li>Release engineering: develop → staging → produção</li>
+        <li>On-call, resposta a incidentes e post-mortems</li>
+      </ul>
+      <ul class="en">
+        <li>Event-driven serverless backend (AWS Lambda, SQS)</li>
+        <li>Full stack: REST APIs (FastAPI) and React UIs</li>
+        <li>LLM applications: tool calling, RAG, guardrails, evals</li>
+        <li>Release engineering: develop → staging → production</li>
+        <li>On-call, incident response and post-mortems</li>
+      </ul>
+    </div>
+    <div class="co reveal" style="--c:#0b7285">
+      <div class="mark">L</div>
+      <h3>SIGFAP · LEDES/UFMS</h3>
+      <div class="meta"><span class="pt">Analista de Qualidade (QA) · ago 2025 — hoje</span><span class="en">QA Analyst · Aug 2025 — present</span></div>
+      <ul class="pt"><li>Testes manuais e automatizados</li><li>Casos de teste derivados de requisitos</li><li>Triagem e reporte de defeitos</li></ul>
+      <ul class="en"><li>Manual and automated testing</li><li>Requirement-driven test case design</li><li>Defect triage and reporting</li></ul>
+    </div>
+    <div class="co reveal" style="--c:#1c3d6e">
+      <div class="mark">PF</div>
+      <h3><span class="pt">Polícia Federal</span><span class="en">Brazilian Federal Police</span></h3>
+      <div class="meta"><span class="pt">Estagiária em Computação Forense · ago 2024 — out 2025</span><span class="en">Digital Forensics Intern · Aug 2024 — Oct 2025</span></div>
+      <ul class="pt"><li>Automação de fluxos periciais (Python, Java)</li><li>Aquisição forense de discos e cadeia de custódia</li><li>Extração de evidências de dispositivos móveis</li><li>Manutenção de sistemas e scripts legados</li></ul>
+      <ul class="en"><li>Forensic workflow automation (Python, Java)</li><li>Disk acquisition and chain of custody</li><li>Mobile device evidence extraction</li><li>Legacy systems and scripts maintenance</li></ul>
+    </div>
+    <div class="co reveal" style="--c:#5f3dc4">
+      <div class="mark">N</div>
+      <h3><span class="pt">Núcleo de Eng. de Software · UFMS</span><span class="en">Software Engineering Lab · UFMS</span></h3>
+      <div class="meta"><span class="pt">QA → Dev → DevOps → Gerente de Projeto · 2025 — hoje</span><span class="en">QA → Dev → DevOps → Project Manager · 2025 — present</span></div>
+      <ul class="pt"><li>Estratégia de qualidade: testes manuais e automatizados (unit + E2E)</li><li>Desenvolvimento de módulos contábeis</li><li>DevOps: CI, build e deploy de produção</li><li>Gestão ágil: escopo, estimativas, sprints e requisitos</li></ul>
+      <ul class="en"><li>Quality strategy: manual and automated testing (unit + E2E)</li><li>Accounting module development</li><li>DevOps: CI, builds and production deploys</li><li>Agile delivery: scope, estimates, sprints and requirements</li></ul>
+    </div>
+    <div class="co reveal" style="--c:#2b8a3e">
+      <div class="mark">P</div>
+      <h3>PET Sistemas · UFMS</h3>
+      <div class="meta"><span class="pt">Desenvolvedora · Programa de Educação Tutorial</span><span class="en">Developer · Tutorial Education Program</span></div>
+      <ul class="pt"><li>Sistema interno em Next.js</li><li>Decisões de infraestrutura</li></ul>
+      <ul class="en"><li>Internal system in Next.js</li><li>Infrastructure decisions</li></ul>
+    </div>
+    <div class="co reveal" style="--c:#e8590c">
+      <div class="mark">E</div>
+      <h3>EduComp Brasil</h3>
+      <div class="meta"><span class="pt">Voluntária · Desenvolvedora Web · 2026</span><span class="en">Volunteer · Web Developer · 2026</span></div>
+      <ul class="pt"><li>Atualização e manutenção do site do evento</li><li>Node.js, Express, Handlebars</li></ul>
+      <ul class="en"><li>Updates and maintenance of the event website</li><li>Node.js, Express, Handlebars</li></ul>
+    </div>
+  </div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <div class="eyebrow"><span class="pt">03 · Na prática</span><span class="en">03 · In practice</span></div>
+  <h2 class="pt">Como eu trabalho</h2><h2 class="en">How I work</h2>
+  <p class="sub pt">Recortes ilustrativos. Dados fictícios.</p><p class="sub en">Illustrative snippets. Mock data.</p>
+  <div class="examples">
+    <div class="ex reveal">
+      <div class="stage"><pre><span class="c"># guardrail: nunca responder valor que não veio de uma tool</span>
+<span class="k">def</span> <span class="f">money_guard</span>(answer, tool_results):
+    cited = <span class="f">extract_amounts</span>(answer)
+    known = <span class="f">amounts_from</span>(tool_results)
+    <span class="k">if</span> cited - known:
+        <span class="k">return</span> <span class="f">safe_fallback</span>(tool_results)
+    <span class="k">return</span> answer</pre></div>
+      <div class="txt"><h3 class="pt">Guardrails determinísticos para LLM</h3><h3 class="en">Deterministic LLM guardrails</h3>
+      <p class="pt">O modelo gera a resposta, mas código valida o que é crítico. Cada regressão vira caso no eval.</p><p class="en">The model drafts the answer, code validates what's critical. Every regression becomes an eval case.</p></div>
+    </div>
+    <div class="ex reveal">
+      <div class="stage"><pre><span class="k">test</span>(<span class="s">'income statement closes with net profit'</span>, <span class="k">async</span> ({ page }) => {
+  <span class="k">await</span> page.<span class="f">goto</span>(<span class="s">'/reports/income'</span>);
+  <span class="k">await</span> page.<span class="f">getByRole</span>(<span class="s">'button'</span>, { name: <span class="s">'Generate'</span> }).<span class="f">click</span>();
+  <span class="k">await</span> <span class="f">expect</span>(page.<span class="f">getByTestId</span>(<span class="s">'net-profit'</span>))
+    .<span class="f">toHaveText</span>(<span class="s">'$12,500.00'</span>);
+});</pre></div>
+      <div class="txt"><h3 class="pt">Testes E2E e unitários</h3><h3 class="en">E2E and unit testing</h3>
+      <p class="pt">Playwright, Cypress e Jest, com casos derivados direto dos requisitos.</p><p class="en">Playwright, Cypress and Jest, with cases derived straight from requirements.</p></div>
+    </div>
+    <div class="ex reveal">
+      <div class="stage"><div class="flow">
+        <span class="n">issue</span><span class="ar">→</span><span class="n">root cause</span><span class="ar">→</span><span class="n">plan</span><span class="ar">→</span><span class="n g">approval gate</span><span class="ar">→</span><span class="n">fix + tests</span><span class="ar">→</span><span class="n">staging</span><span class="ar">→</span><span class="n">prod</span>
+      </div>
+      <pre style="margin-top:18px"><span class="c"># develop → staging → main</span>
+<span class="f">ci</span>: lint · unit · integration · eval
+<span class="f">gate</span>: staging validation report</pre></div>
+      <div class="txt"><h3 class="pt">Release com gates</h3><h3 class="en">Gated releases</h3>
+      <p class="pt">Nada vai para produção sem CI verde e relatório de validação em staging.</p><p class="en">Nothing reaches production without green CI and a staging validation report.</p></div>
+    </div>
+    <div class="ex reveal">
+      <div class="stage">
+        <div class="kpi"><div><span style="color:var(--muted);font-size:13px"><span class="pt">Resolução autônoma · mês</span><span class="en">Autonomous resolution · month</span></span><br><b>↑</b></div><span>trend</span></div>
+        <div class="bars"><div style="height:45%"></div><div style="height:52%"></div><div style="height:48%"></div><div style="height:61%"></div><div style="height:58%"></div><div style="height:66%"></div><div style="height:70%"></div><div class="hi" style="height:78%"></div></div>
+      </div>
+      <div class="txt"><h3 class="pt">Decisão orientada a dados</h3><h3 class="en">Data-driven decisions</h3>
+      <p class="pt">SQL sobre o data lake, definição clara de métrica e Pareto de causas para priorizar o backlog.</p><p class="en">SQL over the data lake, clear metric definitions and root-cause Pareto to prioritize the backlog.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="mcps"><div class="wrap">
+  <div class="eyebrow"><span class="pt">04 · Ferramentas</span><span class="en">04 · Tooling</span></div>
+  <h2 class="pt">MCPs e automações que construí</h2><h2 class="en">MCPs and automations I built</h2>
+  <p class="sub pt">Integro agentes de código aos sistemas via Model Context Protocol e escrevo skills que automatizam o ciclo de desenvolvimento.</p>
+  <p class="sub en">I connect coding agents to systems via the Model Context Protocol and write skills that automate the development lifecycle.</p>
+  <div class="duo">
+    <div class="panel reveal">
+      <h3>MCP servers</h3>
+      <p class="pt">Autoria e integração.</p><p class="en">Authored and integrated.</p>
+      <div class="item"><div class="ic">🔌</div><div><b>Customer data MCP</b> <code>author</code><p class="pt">BFF serverless que expõe dados a agentes, read-only.</p><p class="en">Serverless BFF exposing data to agents, read-only.</p></div></div>
+      <div class="item"><div class="ic">🗄️</div><div><b>PostgreSQL</b> <code>integration</code><p class="pt">Consultas read-only em prod/staging para debug de incidentes.</p><p class="en">Read-only prod/staging queries for incident debugging.</p></div></div>
+      <div class="item"><div class="ic">📊</div><div><b>Athena · BigQuery · Grafana</b> <code>integration</code><p class="pt">Métricas, logs e KPIs.</p><p class="en">Metrics, logs and KPIs.</p></div></div>
+      <div class="item"><div class="ic">☸️</div><div><b>Kubernetes (EKS)</b> <code>integration</code><p class="pt">Status, logs e rollback.</p><p class="en">Status, logs and rollback.</p></div></div>
+      <div class="item"><div class="ic">🎨</div><div><b>Figma</b> <code>integration</code><p class="pt">Protótipos de alta fidelidade.</p><p class="en">High-fidelity prototyping.</p></div></div>
+    </div>
+    <div class="panel reveal">
+      <h3><span class="pt">Skills (15+)</span><span class="en">Skills (15+)</span></h3>
+      <p class="pt">Automações reutilizáveis para agentes de código.</p><p class="en">Reusable automations for coding agents.</p>
+      <div class="item"><div class="ic">🚀</div><div><b>Release promotion</b><p class="pt">Merge com CI verde, promoção entre ambientes, validação e PR de produção.</p><p class="en">Merge on green CI, environment promotion, validation and production PR.</p></div></div>
+      <div class="item"><div class="ic">🧪</div><div><b>Eval triage</b><p class="pt">Classifica falhas do eval em bug real ou cenário incorreto.</p><p class="en">Classifies eval failures as real bugs or wrong scenarios.</p></div></div>
+      <div class="item"><div class="ic">📈</div><div><b>KPI report</b><p class="pt">Relatório diário com Pareto de falhas e projeção do mês.</p><p class="en">Daily report with failure Pareto and month-end projection.</p></div></div>
+      <div class="item"><div class="ic">🗓️</div><div><b>Daily summary</b><p class="pt">Resume sessões, PRs e progresso para o standup.</p><p class="en">Summarizes sessions, PRs and progress for standup.</p></div></div>
+      <div class="item"><div class="ic">🔔</div><div><b>PR review notify</b><p class="pt">Avisa o canal de review quando um PR abre.</p><p class="en">Pings the review channel when a PR opens.</p></div></div>
+      <div class="item"><div class="ic">🛡️</div><div><b>Agent environment audit</b><p class="pt">Diagnóstico de saúde e riscos da configuração de agentes.</p><p class="en">Health and risk audit of agent setups.</p></div></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="stack"><div class="wrap">
+  <div class="eyebrow">05 · Stack</div>
+  <h2 class="pt">Stack técnica</h2><h2 class="en">Tech stack</h2>
+  <p class="sub">&nbsp;</p>
+  <div class="stack">
+    <div class="st reveal"><h4><span class="pt">Linguagens</span><span class="en">Languages</span></h4>
+      <div class="bar"><div class="t">Python<span class="pt">diário</span><span class="en">daily</span></div><div class="tr"><i style="width:95%"></i></div></div>
+      <div class="bar"><div class="t">TypeScript / JavaScript<span class="pt">diário</span><span class="en">daily</span></div><div class="tr"><i style="width:88%"></i></div></div>
+      <div class="bar"><div class="t">SQL<span class="pt">diário</span><span class="en">daily</span></div><div class="tr"><i style="width:82%"></i></div></div>
+      <div class="bar"><div class="t">Java<span class="pt">frequente</span><span class="en">frequent</span></div><div class="tr"><i style="width:62%"></i></div></div>
+    </div>
+    <div class="st reveal"><h4>Backend & Frontend</h4><div class="chips"><span class="chip">FastAPI</span><span class="chip">Node.js</span><span class="chip">Express</span><span class="chip">REST</span><span class="chip">gRPC</span><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">Vue.js</span><span class="chip">Electron</span><span class="chip">Tailwind</span></div></div>
+    <div class="st reveal"><h4>Cloud & DevOps</h4><div class="chips"><span class="chip">AWS Lambda</span><span class="chip">SQS</span><span class="chip">Docker</span><span class="chip">Kubernetes (EKS)</span><span class="chip">GitOps</span><span class="chip">GitHub Actions</span><span class="chip">CI/CD</span></div></div>
+    <div class="st reveal"><h4><span class="pt">Dados & Observabilidade</span><span class="en">Data & Observability</span></h4><div class="chips"><span class="chip">PostgreSQL</span><span class="chip">SQLite</span><span class="chip">Athena</span><span class="chip">BigQuery</span><span class="chip">Grafana</span><span class="chip">Loki</span></div></div>
+    <div class="st reveal"><h4><span class="pt">Qualidade</span><span class="en">Quality</span></h4><div class="chips"><span class="chip">Playwright</span><span class="chip">Cypress</span><span class="chip">Jest</span><span class="chip">Pytest</span><span class="chip">Postman</span><span class="chip">TDD</span></div></div>
+    <div class="st reveal"><h4><span class="pt">IA aplicada & Processo</span><span class="en">Applied AI & Process</span></h4><div class="chips"><span class="chip">LLM</span><span class="chip">RAG</span><span class="chip">tool calling</span><span class="chip">MCP</span><span class="chip">LLM evals</span><span class="chip">Scrum</span><span class="chip">BPMN</span><span class="chip">Figma</span></div></div>
+  </div>
+</div></section>
+
+<section id="formacao"><div class="wrap">
+  <div class="eyebrow"><span class="pt">06 · Formação</span><span class="en">06 · Education</span></div>
+  <h2 class="pt">Formação</h2><h2 class="en">Education</h2>
+  <p class="sub">&nbsp;</p>
+  <div class="edu">
+    <div class="st reveal"><span class="mono" style="font-size:12px;color:var(--accent)">2023 — 2026</span><b class="pt">Bacharelado em Engenharia de Software</b><b class="en">B.Sc. in Software Engineering</b><p class="pt">Universidade Federal de Mato Grosso do Sul (UFMS)</p><p class="en">Federal University of Mato Grosso do Sul (UFMS)</p></div>
+    <div class="st reveal"><span class="mono" style="font-size:12px;color:var(--accent)">2019 — 2022</span><b class="pt">Técnico em Informática</b><b class="en">IT Technician</b><p class="pt">Instituto Federal de Mato Grosso do Sul (IFMS)</p><p class="en">Federal Institute of Mato Grosso do Sul (IFMS)</p></div>
+    <div class="st reveal"><span class="mono" style="font-size:12px;color:var(--accent)">2024 — 2026</span><b class="pt">Pesquisa & extensão</b><b class="en">Research & outreach</b><p class="pt">Núcleo de Engenharia de Software, PET Sistemas e EduComp Brasil</p><p class="en">Software Engineering Lab, PET Sistemas and EduComp Brasil</p></div>
+  </div>
+</div></section>
+
+<footer id="contato">
+  <div class="blob b1" style="top:auto;bottom:-200px;right:30%"></div>
+  <div class="wrap">
+    <div class="eyebrow"><span class="pt">07 · Contato</span><span class="en">07 · Contact</span></div>
+    <h2 class="pt">Vamos construir algo?</h2><h2 class="en">Let's build something.</h2>
+    <div class="cta">
+      <a class="btn primary" href="mailto:amandabalcacar@gmail.com">✉ amandabalcacar@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/amandagois/" target="_blank">LinkedIn ↗</a>
+      <a class="btn" href="https://github.com/httpsdinha" target="_blank">GitHub ↗</a>
+    </div>
+    <p class="small">© 2026 Amanda Gois</p>
+  </div>
+</footer>
+
+<script>
+const r=document.documentElement,b=document.getElementById('theme');
+try{const t=localStorage.getItem('theme');if(t)r.dataset.theme=t}catch(e){}
+b.onclick=()=>{const d=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=d?'light':'dark';try{localStorage.setItem('theme',r.dataset.theme)}catch(e){}};
+function setLang(l){r.dataset.lang=l;r.lang=l==='pt'?'pt-BR':'en';document.querySelectorAll('.lang button').forEach(x=>x.classList.toggle('on',x.dataset.l===l));document.title=l==='pt'?'Amanda Gois · Engenheira de Software':'Amanda Gois · Software Engineer';try{localStorage.setItem('lang',l)}catch(e){}}
+let L='pt';try{L=localStorage.getItem('lang')||(navigator.language.startsWith('pt')?'pt':'en')}catch(e){}
+setLang(L);
+document.querySelectorAll('.lang button').forEach(x=>x.onclick=()=>setLang(x.dataset.l));
+document.querySelectorAll('.track-c>.p').forEach(card=>{
+  const ps=[...card.querySelectorAll(':scope>p')];
+  const firstPt=ps.find(x=>x.classList.contains('pt')),firstEn=ps.find(x=>x.classList.contains('en'));
+  [firstPt,firstEn].forEach(x=>x&&x.classList.add('sum'));if(!firstPt&&ps[0])ps[0].classList.add('sum');
+  const hidden=card.querySelector(':scope>.lbl,:scope>.flow,:scope>.result')||ps.some(x=>!x.classList.contains('sum'));
+  const f=card.querySelector('.foot');if(!hidden||!f)return;
+  const b=document.createElement('button');b.className='more';f.before(b);
+  const lab=()=>b.innerHTML=card.classList.contains('open')?'<span class="pt">Ver menos ↑</span><span class="en">Read less ↑</span>':'<span class="pt">Ver detalhes →</span><span class="en">See details →</span>';
+  lab();b.onclick=()=>{card.classList.toggle('open');lab()};
+});
+document.querySelectorAll('.carousel').forEach(c=>{const t=c.querySelector('.track-c'),pv=c.querySelector('.prev'),nx=c.querySelector('.next');
+const step=()=>t.querySelector('.p').offsetWidth+16;
+const upd=()=>{pv.disabled=t.scrollLeft<5;nx.disabled=t.scrollLeft+t.clientWidth>=t.scrollWidth-5};
+pv.onclick=()=>t.scrollBy({left:-step()});nx.onclick=()=>t.scrollBy({left:step()});t.addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd()});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
