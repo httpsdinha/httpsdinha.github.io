@@ -55,7 +55,7 @@ h1 em{font-style:italic;font-weight:400;color:var(--accent)}
 .btn:hover{transform:translateY(-2px);border-color:var(--accent)}
 
 .idcard{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 30px 60px -30px rgba(0,0,0,.25);transform:rotate(1.5deg)}
-.avatar{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-family:Fraunces,serif;font-size:30px;font-weight:800;color:#fff}
+.avatar{width:96px;height:96px;border-radius:24px;object-fit:cover;border:3px solid var(--surface);box-shadow:0 0 0 2px var(--accent);background:linear-gradient(135deg,var(--accent),var(--accent2));display:grid;place-items:center;font-family:Fraunces,serif;font-size:30px;font-weight:800;color:#fff}
 .idcard h3{font-family:Fraunces,serif;font-size:22px;margin-top:16px}
 .idcard .role{color:var(--muted);font-size:14px}
 .idrows{margin-top:18px;display:flex;flex-direction:column;gap:10px;font-size:14px}
@@ -134,6 +134,7 @@ h2{font-family:Fraunces,serif;font-size:clamp(32px,4.6vw,52px);font-weight:800;l
 
 /* examples */
 .examples{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.examples>.ex:nth-child(3){grid-column:span 2}
 .ex{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column}
 .ex .stage{padding:24px;background:linear-gradient(160deg,var(--soft),transparent 70%);border-bottom:1px solid var(--line);min-height:250px;display:flex;flex-direction:column;justify-content:center}
 .ex .txt{padding:22px 24px}
@@ -144,7 +145,8 @@ h2{font-family:Fraunces,serif;font-size:clamp(32px,4.6vw,52px);font-weight:800;l
 .msg.u{align-self:flex-end;background:#d3f9d8;color:#1b4332;border-bottom-right-radius:4px}
 .msg.a{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:4px}
 .msg small{display:block;font-size:11px;opacity:.6;margin-top:4px}
-pre{background:var(--code);color:var(--codeink);border-radius:14px;padding:18px;font:13px/1.6 "JetBrains Mono",monospace;overflow-x:auto}
+pre{background:var(--code);color:var(--codeink);border-radius:14px;padding:18px;font:12.5px/1.6 "JetBrains Mono",monospace;white-space:pre;overflow-x:auto;scrollbar-width:none}
+pre::-webkit-scrollbar{display:none}
 pre .k{color:#ff8a4c}pre .s{color:#8ce99a}pre .c{color:#868e96}pre .f{color:#a5d8ff}
 .bars{display:flex;align-items:flex-end;gap:8px;height:150px;padding-top:10px}
 .bars div{flex:1;background:var(--accent3);border-radius:6px 6px 2px 2px;opacity:.85;position:relative}
@@ -226,7 +228,8 @@ footer .small{color:var(--muted);font-size:13px;margin-top:56px}
 .track-c>.p>.top{margin-top:4px}
 .track-c>.p>.foot{margin-bottom:22px}
 .media{display:block;height:130px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
-.media.img img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .5s}
+.media.img{background:#fbfaf7}
+.media.img img{width:100%;height:100%;object-fit:contain;padding:8px;transition:transform .5s}
 .media.img:hover img{transform:scale(1.04)}
 .media .cap{position:absolute;left:10px;bottom:10px;right:10px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(6px);font-size:12px;padding:5px 10px;border-radius:8px}
 .media.cover{display:grid;place-items:center;font-size:44px}
@@ -288,7 +291,7 @@ html:not([data-lang]) .en{display:none!important}
       </div>
     </div>
     <div class="idcard">
-      <div class="avatar">AG</div>
+      <img class="avatar" src="portfolio-assets/amanda.jpg" alt="Amanda Gois">
       <h3>Amanda Gois</h3>
       <div class="role"><span class="pt">Engenheira de Software · Brasil</span><span class="en">Software Engineer · Brazil</span></div>
       <div class="idrows">
@@ -385,7 +388,7 @@ html:not([data-lang]) .en{display:none!important}
       <div class="arrows"><button class="prev" aria-label="anterior">←</button><button class="next" aria-label="próximo">→</button></div></div>
     <div class="track-c">
     <article class="p" data-c="univ">
-      <a class="media img" href="portfolio-assets/coins-qualidade.png" target="_blank"><img src="portfolio-assets/coins-qualidade.png" alt="Qualidade no COIN'S: suíte 2,5× maior e 98% de cobertura" loading="lazy"><span class="cap"><span class="pt">Qualidade no COIN'S: suíte 2,5× maior e 98% de cobertura</span><span class="en">COIN'S quality: 2.5× test suite, 98% coverage</span></span></a>
+      <a class="media img" href="portfolio-assets/coins-qualidade.png" target="_blank"><img src="portfolio-assets/coins-qualidade.png" alt="Qualidade no COIN'S: suíte 2,5× maior e 98% de cobertura" loading="lazy"></a>
       <div class="top"><span class="cat">Desktop · UFMS</span><span class="lock">NES · UFMS</span></div>
       <h3 class="pt">COIN'S · sistema contábil desktop</h3><h3 class="en">COIN'S · desktop accounting system</h3>
       <p class="pt">Aplicação desktop offline para ensino de contabilidade, evoluída por equipes diferentes a cada semestre.</p>
@@ -402,7 +405,7 @@ html:not([data-lang]) .en{display:none!important}
       <a class="go" href="https://nes.facom.ufms.br/aluno/amanda-caroline-de-gois-balcacar" target="_blank"><span class="pt">Meu perfil no NES ↗</span><span class="en">My NES profile ↗</span></a></div>
     </article>
     <article class="p" data-c="univ">
-      <a class="media img" href="portfolio-assets/checklist-fases.jpeg" target="_blank"><img src="portfolio-assets/checklist-fases.jpeg" alt="Processo da pesquisa em BPMN" loading="lazy"><span class="cap"><span class="pt">Processo da pesquisa em BPMN</span><span class="en">Research process in BPMN</span></span></a>
+      <a class="media img" href="portfolio-assets/checklist-fases.jpeg" target="_blank"><img src="portfolio-assets/checklist-fases.jpeg" alt="Processo da pesquisa em BPMN" loading="lazy"></a>
       <div class="top"><span class="cat">Pesquisa · Segurança</span><span class="lock">UFMS</span></div>
       <h3 class="pt">Checklist de segurança em arquitetura de microsserviços</h3><h3 class="en">Security checklist for microservices architecture</h3>
       <div class="lbl pt">Problema</div><div class="lbl en">Problem</div>
@@ -554,9 +557,10 @@ html:not([data-lang]) .en{display:none!important}
       <p class="pt">O modelo gera a resposta, mas código valida o que é crítico. Cada regressão vira caso no eval.</p><p class="en">The model drafts the answer, code validates what's critical. Every regression becomes an eval case.</p></div>
     </div>
     <div class="ex reveal">
-      <div class="stage"><pre><span class="k">test</span>(<span class="s">'income statement closes with net profit'</span>, <span class="k">async</span> ({ page }) => {
+      <div class="stage"><pre><span class="k">test</span>(<span class="s">'income statement closes'</span>, <span class="k">async</span> ({ page }) => {
   <span class="k">await</span> page.<span class="f">goto</span>(<span class="s">'/reports/income'</span>);
-  <span class="k">await</span> page.<span class="f">getByRole</span>(<span class="s">'button'</span>, { name: <span class="s">'Generate'</span> }).<span class="f">click</span>();
+  <span class="k">await</span> page.<span class="f">getByRole</span>(<span class="s">'button'</span>,
+    { name: <span class="s">'Generate'</span> }).<span class="f">click</span>();
   <span class="k">await</span> <span class="f">expect</span>(page.<span class="f">getByTestId</span>(<span class="s">'net-profit'</span>))
     .<span class="f">toHaveText</span>(<span class="s">'$12,500.00'</span>);
 });</pre></div>
@@ -572,14 +576,6 @@ html:not([data-lang]) .en{display:none!important}
 <span class="f">gate</span>: staging validation report</pre></div>
       <div class="txt"><h3 class="pt">Release com gates</h3><h3 class="en">Gated releases</h3>
       <p class="pt">Nada vai para produção sem CI verde e relatório de validação em staging.</p><p class="en">Nothing reaches production without green CI and a staging validation report.</p></div>
-    </div>
-    <div class="ex reveal">
-      <div class="stage">
-        <div class="kpi"><div><span style="color:var(--muted);font-size:13px"><span class="pt">Resolução autônoma · mês</span><span class="en">Autonomous resolution · month</span></span><br><b>↑</b></div><span>trend</span></div>
-        <div class="bars"><div style="height:45%"></div><div style="height:52%"></div><div style="height:48%"></div><div style="height:61%"></div><div style="height:58%"></div><div style="height:66%"></div><div style="height:70%"></div><div class="hi" style="height:78%"></div></div>
-      </div>
-      <div class="txt"><h3 class="pt">Decisão orientada a dados</h3><h3 class="en">Data-driven decisions</h3>
-      <p class="pt">SQL sobre o data lake, definição clara de métrica e Pareto de causas para priorizar o backlog.</p><p class="en">SQL over the data lake, clear metric definitions and root-cause Pareto to prioritize the backlog.</p></div>
     </div>
   </div>
 </div></section>
